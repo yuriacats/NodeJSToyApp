@@ -13,7 +13,7 @@ jobs:
         run: |
           IMAGE_NAME=test_container:${GITHUB_REF#refs/heads/} # docer imageの名前とそのタグ、${GITHUB_REF#refs/heads/}でブランチ名を取得している
           docker build ./app --tag docker.pkg.github.com/${GITHUB_REPOSITORY}/${IMAGE_NAME}
-          docker login docker.pkg.github.com --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD}
+          docker login ghcr.io --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD}
           docker push ghcr.io/yuriacats/nodejs_toyapp/${IMAGE_NAME}
         env:
           DOCKER_USERNAME: ${{ secrets.CI_REGISTRY_USER }} # リポジトリのsecretsとして定義した値を環境変数に渡す
